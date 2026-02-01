@@ -1,0 +1,30 @@
+# Quarto output
+*.pdf
+*_files/
+.quarto/
+
+# LaTeX auxiliary files
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Typst cache
+.typst-cache/
+
+/.luarc.json
+
+plans
+latex_exam

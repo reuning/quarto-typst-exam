@@ -1,0 +1,2 @@
+- Labels are not implemented becasue of a need to refactor.
+- Large grade tables wil be garbled. 

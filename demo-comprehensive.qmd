@@ -1,0 +1,534 @@
+---
+title: "Comprehensive Exam Format Demonstration"
+author: "Exam Format Extension"
+date: "February 1, 2026"
+format:
+  exam-typst:
+    # Point system configuration
+    add-points: true
+    point-name: "points"
+    bonus-point-name: "bonus points"
+    point-position: "right-margin"  # Options: "right-margin", "left-margin"
+    point-format: "parentheses"     # Options: "parentheses", "brackets", "box"
+    
+    # Solution/answer configuration
+    print-answers: false            # Set to true to show solutions
+    solution-style: "framed"        # Options: "framed", "shaded", "unframed"
+    solution-color: "e0e0e0"        # Hex color for solution background
+    solution-title: "Solution:"     # Default title for solutions
+    
+    # Multiple choice configuration
+    choice-label-style: "A."        # Options: "A.", "A)", "(A)", "a.", "a)", "(a)"
+    checkbox-char: "☐"              # Character for unchecked boxes
+    checked-char: "☑"               # Character for checked boxes
+    correct-choice-emphasis: "bold" # Options: "bold", "italic", "underline"
+    
+    # Header/footer configuration (first page)
+    first-page-header-left: "DEMO EXAM"
+    first-page-header-center: "Comprehensive Feature Test"
+    first-page-header-right: "Winter 2026"
+    first-page-footer-left: "Name: _______________"
+    first-page-footer-center: ""
+    first-page-footer-right: "Student ID: _______________"
+    
+    # Header/footer configuration (running pages)
+    running-header-left: "Demo Exam"
+    running-header-center: ""
+    running-header-right: "Winter 2026"
+    running-footer-left: ""
+    running-footer-center: "Page"
+    running-footer-right: ""
+    
+    # Header/footer rules
+    header-rule: false
+    footer-rule: false
+    running-header-rule: true
+    running-footer-rule: true
+    
+    # Extra spacing
+    extra-head-height: 0.5cm
+    extra-foot-height: 0.5cm
+    
+    # Keep intermediate files for debugging
+    keep-typ: true
+---
+
+# Exam Instructions
+
+::: {.fullwidth}
+**IMPORTANT**: This exam demonstrates all features of the Quarto Exam Format extension. Read all instructions carefully. You have 3 hours to complete this exam. Show all work for partial credit.
+:::
+
+## Grading Table
+
+::: {.grade-table orientation="horizontal"}
+:::
+
+\
+
+# Section 1: Basic Question Hierarchy
+
+This section demonstrates the four-level question hierarchy using **sequential syntax**.
+
+::: {.question points="10"}
+What is the derivative of $f(x) = x^2 + 3x + 2$?
+:::
+
+::: {.solutionorlines height="1.5in"}
+$f'(x) = 2x + 3$
+:::
+
+::: {.question points="20"}
+Solve the following multi-part problem about the Pythagorean theorem.
+:::
+
+::: {.part points="5"}
+State the Pythagorean theorem.
+:::
+
+::: {.solutionorbox height="1in"}
+In a right triangle, $a^2 + b^2 = c^2$, where $c$ is the hypotenuse.
+:::
+
+::: {.part points="15"}
+Provide a proof of the theorem.
+:::
+
+::: {.subpart points="7"}
+Draw a diagram showing a right triangle with sides labeled.
+:::
+
+::: {.solutionorgrid height="2in" spacing="0.5cm"}
+[Diagram would be drawn here]
+:::
+
+::: {.subpart points="8"}
+Complete the algebraic steps of the proof.
+:::
+
+::: {.subsubpart points="3"}
+Show that $a^2 + b^2 = c^2$ using similar triangles.
+:::
+
+::: {.solution}
+Using similar triangles, we can show that the areas relate such that $a^2 + b^2 = c^2$.
+:::
+
+::: {.subsubpart points="5"}
+Explain why this relationship holds only for right triangles.
+:::
+
+::: {.solutionordottedlines height="1.5in" spacing="0.6cm"}
+The relationship depends on the 90-degree angle, which creates the specific geometric properties needed for the proof.
+:::
+
+# Section 2: Point System Features
+
+This section demonstrates point positioning, formatting, and bonus points.
+
+::: {.question points="7.5"}
+This question demonstrates half-point support. Calculate $\frac{15}{2}$.
+:::
+
+::: {.answer-lines height="1in" spacing="0.5cm"}
+:::
+
+::: {.question points="1"}
+This question has exactly 1 point (singular form test).
+:::
+
+::: {.question points="10" bonus="true"}
+**Bonus Question**: What is the airspeed velocity of an unladen swallow?
+:::
+
+::: {.solution style="shaded"}
+African or European? (Approximately 11 meters per second for European swallow)
+:::
+
+# Section 3: Multiple Choice Questions
+
+This section demonstrates various multiple choice formats.
+
+::: {.question points="5"}
+Which of the following is the capital of France?
+
+::: {.choices correct="2"}
+- London
+- Paris
+- Berlin
+- Madrid
+:::
+:::
+
+::: {.question points="5"}
+Select all prime numbers (checkbox format):
+
+::: {.checkboxes correct="3"}
+- 4
+- 6
+- 7
+- 9
+:::
+:::
+
+::: {.question points="5"}
+Inline choices: Which is a vowel?
+
+::: {.oneparchoices correct="A"}
+- A
+- B
+- C
+- D
+:::
+:::
+
+::: {.question points="5"}
+Inline checkboxes: Select the correct answer.
+
+::: {.oneparcheckboxes correct="2"}
+- Incorrect
+- Correct
+- Incorrect
+- Incorrect
+:::
+:::
+
+::: {.question points="10"}
+Multiple choice with mathematical content:
+
+::: {.choices correct="C"}
+- $\int x \, dx = x^2 + C$
+- $\frac{d}{dx}(x^2) = x$
+- $\lim_{x \to 0} \frac{\sin x}{x} = 1$
+- $e^{i\pi} = 1$
+:::
+:::
+
+# Section 4: Solution Environments
+
+This section demonstrates different solution styles and answer spaces.
+
+::: {.question points="10"}
+What is the integral of $f(x) = 2x$?
+:::
+
+::: {.solution style="framed"}
+$\int 2x \, dx = x^2 + C$
+:::
+
+::: {.question points="10"}
+Explain the concept of limits.
+:::
+
+::: {.solution style="shaded"}
+A limit describes the value that a function approaches as the input approaches some value. It's fundamental to calculus.
+:::
+
+::: {.question points="10"}
+Describe three types of chemical bonds.
+:::
+
+::: {.solution style="unframed"}
+1. **Ionic bonds**: Transfer of electrons
+2. **Covalent bonds**: Sharing of electrons
+3. **Metallic bonds**: Sea of electrons
+:::
+
+::: {.question points="15"}
+Solve the system of equations:
+
+$$\begin{cases}
+2x + 3y = 7 \\
+x - y = 1
+\end{cases}$$
+:::
+
+::: {.solutionorbox height="2.5in"}
+From the second equation: $x = y + 1$
+
+Substituting: $2(y + 1) + 3y = 7$
+
+$2y + 2 + 3y = 7$
+
+$5y = 5$
+
+$y = 1$, therefore $x = 2$
+:::
+
+::: {.question points="10"}
+Write a short paragraph about photosynthesis.
+:::
+
+::: {.answer-box height="2in"}
+:::
+
+# Section 5: Titled Questions
+
+This section demonstrates the titled question feature (Phase 7, Feature 1).
+
+::: {.question title="The Fundamental Theorem of Calculus" points="15" label="q:ftc"}
+State the Fundamental Theorem of Calculus and explain its significance.
+:::
+
+::: {.solutionorlines height="2in"}
+The FTC states that differentiation and integration are inverse operations. If $F'(x) = f(x)$, then $\int_a^b f(x) \, dx = F(b) - F(a)$.
+:::
+
+::: {.question title="Newton's Method" points="12"}
+Use Newton's method to approximate $\sqrt{2}$ to three decimal places.
+:::
+
+::: {.solutionorbox height="2.5in"}
+Starting with $x_0 = 1.5$, iterate: $x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$ where $f(x) = x^2 - 2$.
+:::
+
+::: {.question title="Challenge Problem" points="20" bonus="true"}
+Prove that there are infinitely many prime numbers.
+:::
+
+::: {.solution}
+**Euclid's proof**: Assume finitely many primes $p_1, p_2, \ldots, p_n$. Consider $N = p_1 \cdot p_2 \cdots p_n + 1$. This number is not divisible by any of the primes, so either it's prime itself or divisible by a prime not in our list. Contradiction.
+:::
+
+# Section 6: Uplevel and Fullwidth
+
+This section demonstrates uplevel (instructions within questions) and fullwidth (exam-wide notices).
+
+::: {.fullwidth}
+**SECTION NOTICE**: Questions 10-12 require the use of the formula sheet provided on the last page.
+:::
+
+::: {.question points="25"}
+Solve the following differential equations.
+:::
+
+::: {.uplevel}
+**Available methods**:
+- Separation of variables
+- Integrating factor
+- Characteristic equation
+
+Choose the most appropriate method for each problem.
+:::
+
+::: {.part points="12"}
+Solve: $\frac{dy}{dx} = \frac{y}{x}$
+:::
+
+::: {.solutionorbox height="2in"}
+Separating variables: $\frac{dy}{y} = \frac{dx}{x}$
+
+Integrating: $\ln|y| = \ln|x| + C$
+
+Solution: $y = Kx$ where $K = e^C$
+:::
+
+::: {.part points="13"}
+Solve: $y'' + 4y' + 4y = 0$
+:::
+
+::: {.solutionorbox height="2in"}
+Characteristic equation: $r^2 + 4r + 4 = 0$
+
+$(r + 2)^2 = 0$, so $r = -2$ (repeated root)
+
+Solution: $y = (C_1 + C_2 x)e^{-2x}$
+:::
+
+::: {.question points="20"}
+Linear algebra problem.
+:::
+
+::: {.uplevel}
+**Given**: Matrix $A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}$
+:::
+
+::: {.part points="10"}
+Find the eigenvalues of $A$.
+:::
+
+::: {.solutionorlines height="1.5in"}
+$\det(A - \lambda I) = (1-\lambda)(4-\lambda) - 6 = \lambda^2 - 5\lambda - 2 = 0$
+
+$\lambda = \frac{5 \pm \sqrt{33}}{2}$
+:::
+
+::: {.part points="10"}
+Find the determinant of $A$.
+:::
+
+::: {.solution}
+$\det(A) = 1 \cdot 4 - 2 \cdot 3 = -2$
+:::
+
+\pagebreak
+
+# Section 7: Advanced Features
+
+This section demonstrates additional advanced features.
+
+::: {.question points="15"}
+Essay question: Discuss the impact of calculus on modern science.
+:::
+
+::: {.part points="5"}
+Introduction and thesis.
+:::
+
+::: {.answer-lines height="1.5in"}
+:::
+
+::: {.part points="7"}
+Supporting arguments with examples.
+:::
+
+::: {.answer-lines height="2.5in"}
+:::
+
+::: {.part points="3"}
+Conclusion.
+:::
+
+::: {.answer-lines height="1in"}
+:::
+
+::: {.question points="20"}
+True/False questions with explanations.
+:::
+
+::: {.part points="5"}
+True or False: Every continuous function is differentiable.
+:::
+
+::: {.checkboxes correct="2"}
+- True
+- False
+:::
+
+::: {.solution}
+**False**. Example: $f(x) = |x|$ is continuous everywhere but not differentiable at $x = 0$.
+:::
+
+::: {.part points="5"}
+True or False: Every differentiable function is continuous.
+:::
+
+::: {.checkboxes correct="1"}
+- True
+- False
+:::
+
+::: {.solution}
+**True**. Differentiability implies continuity.
+:::
+
+::: {.part points="10"}
+Explain the relationship between continuity and differentiability.
+:::
+
+::: {.solutionorbox height="2in"}
+Differentiability is a stronger condition than continuity. If a function is differentiable at a point, it must be continuous there. However, continuity does not guarantee differentiability.
+:::
+
+# Section 9: Custom Solution Titles
+
+::: {.question points="10"}
+What is the limit: $\lim_{x \to 0} \frac{\sin x}{x}$?
+:::
+
+::: {.solution title="Answer:"}
+The limit equals 1. This is a standard limit in calculus.
+:::
+
+::: {.question points="15"}
+Prove the product rule for derivatives.
+:::
+
+::: {.solutionbox height="3in" title="Proof:"}
+Let $h(x) = f(x)g(x)$. Then:
+
+$h'(x) = \lim_{\Delta x \to 0} \frac{f(x+\Delta x)g(x+\Delta x) - f(x)g(x)}{\Delta x}$
+
+Adding and subtracting $f(x+\Delta x)g(x)$:
+
+$= \lim_{\Delta x \to 0} \left[\frac{f(x+\Delta x)g(x+\Delta x) - f(x+\Delta x)g(x) + f(x+\Delta x)g(x) - f(x)g(x)}{\Delta x}\right]$
+
+$= \lim_{\Delta x \to 0} \left[f(x+\Delta x)\frac{g(x+\Delta x) - g(x)}{\Delta x} + g(x)\frac{f(x+\Delta x) - f(x)}{\Delta x}\right]$
+
+$= f(x)g'(x) + g(x)f'(x)$ ∎
+:::
+
+# Section 10: Mixed Content
+
+::: {.question points="25"}
+Programming question: Write a function to compute the factorial of a number.
+:::
+
+::: {.uplevel}
+**Language**: Python 3. You may use recursion or iteration.
+:::
+
+::: {.part points="15"}
+Write the recursive version.
+:::
+
+::: {.solutionorbox height="2.5in"}
+Recursive solution: Check if n is 0 or 1 (base case), return 1. Otherwise, return n multiplied by factorial(n-1).
+:::
+
+::: {.part points="10"}
+Write the iterative version.
+:::
+
+::: {.solutionorbox height="2in"}
+Iterative solution: Initialize result to 1, then multiply result by each integer from 2 to n.
+:::
+
+::: {.question points="20"}
+Statistical analysis question.
+:::
+
+::: {.uplevel}
+**Given data**: Sample mean $\bar{x} = 100$, sample standard deviation $s = 15$, sample size $n = 25$.
+:::
+
+::: {.part points="10"}
+Calculate the 95% confidence interval for the population mean.
+:::
+
+::: {.solutionorlines height="2in"}
+Using $t$-distribution with $df = 24$: $t_{0.025} \approx 2.064$
+
+$CI = \bar{x} \pm t \cdot \frac{s}{\sqrt{n}} = 100 \pm 2.064 \cdot \frac{15}{\sqrt{25}} = 100 \pm 6.19$
+
+$CI = [93.81, 106.19]$
+:::
+
+::: {.part points="10"}
+Interpret the confidence interval.
+:::
+
+::: {.solution}
+We are 95% confident that the true population mean lies between 93.81 and 106.19.
+:::
+
+# Grading Summary Tables
+
+## Vertical Grade Table
+
+::: {.grade-table}
+:::
+
+\
+
+## Horizontal Point Table (No Score Column)
+
+::: {.point-table orientation="horizontal"}
+:::
+
+\
+
+## Grade Table with Bonus Points
+
+::: {.grade-table include-bonus="true" orientation="horizontal"}
+:::
