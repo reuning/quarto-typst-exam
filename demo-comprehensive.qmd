@@ -68,9 +68,9 @@ format:
 
 # Section 1: Basic Question Hierarchy
 
-This section demonstrates the four-level question hierarchy using **sequential syntax**.
+This section demonstrates the four-level question hierarchy using **sequential syntax**. You can also refer to specifc questions such as: `@q:first`{=typst} and `@q:second @q:sub`{=typst}
 
-::: {.question points="10"}
+::: {.question points="10" label="q:first"}
 What is the derivative of $f(x) = x^2 + 3x + 2$?
 :::
 
@@ -78,11 +78,11 @@ What is the derivative of $f(x) = x^2 + 3x + 2$?
 $f'(x) = 2x + 3$
 :::
 
-::: {.question points="20"}
+::: {.question points="20" label="q:second"}
 Solve the following multi-part problem about the Pythagorean theorem.
 :::
 
-::: {.part points="5"}
+::: {.part points="5" label="q:sub"}
 State the Pythagorean theorem.
 :::
 
@@ -94,7 +94,7 @@ In a right triangle, $a^2 + b^2 = c^2$, where $c$ is the hypotenuse.
 Provide a proof of the theorem.
 :::
 
-::: {.subpart points="7"}
+::: {.subpart points="7" label="q:subpart"}
 Draw a diagram showing a right triangle with sides labeled.
 :::
 
