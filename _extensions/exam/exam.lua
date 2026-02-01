@@ -159,8 +159,8 @@ function Div(el)
     return result
   end
   
-  -- Solution div
-  if el.classes:includes("solution") then
+  -- Solution div (renamed to solutiontext to avoid Quarto's built-in .solution handling)
+  if el.classes:includes("solutiontext") then
     local style = get_attribute(el, "style")
     local height = get_attribute(el, "height")
     local title = get_attribute(el, "title")
@@ -627,3 +627,4 @@ function Div(el)
   
   return el
 end
+
