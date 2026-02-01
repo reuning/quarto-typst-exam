@@ -1359,7 +1359,8 @@
 #let grade_table_horizontal(
   include_bonus: false,
   cell_width: auto,
-  row_height: auto
+  row_height: auto,
+  max_cols: 15  // Maximum columns per table before breaking
 ) = context {
   let qpoints = question-points.get()
   
@@ -1370,52 +1371,88 @@
     return [_No questions with points found_]
   }
   
-  // Build headers
-  let question_headers = ()
-  let point_values = ()
-  let score_cells = ()
+  // Build question data
+  let question_data = ()
   
   // Add regular questions
   for qnum in qnums {
     let qdata = qpoints.at(qnum)
     if not qdata.bonus or include_bonus {
-      question_headers.push([#qnum])
-      point_values.push([#qdata.points])
-      score_cells.push([])  // Empty score cell
+      question_data.push((
+        num: qnum,
+        points: qdata.points,
+        is_bonus: qdata.bonus
+      ))
     }
   }
   
-  // Add total column
+  // Calculate how many tables we need
+  // Reserve 1-2 columns for Total (and Bonus if needed)
   let total = total-points.get()
   let bonus = total-bonus-points.get()
+  let has_bonus = include_bonus and bonus > 0
+  let reserved_cols = if has_bonus { 2 } else { 1 }
   
-  question_headers.push(strong([Total]))
-  point_values.push(strong([#total]))
-  score_cells.push([])
+  // Adjust max_cols to account for the label column
+  let effective_max = max_cols - 1  // -1 for the "Question"/"Points"/"Score" label column
   
-  if include_bonus and bonus > 0 {
-    question_headers.push(strong([Bonus]))
-    point_values.push(strong([#bonus]))
-    score_cells.push([])
+  let num_questions = question_data.len()
+  let questions_per_table = calc.max(1, effective_max - reserved_cols)
+  let num_tables = calc.ceil(num_questions / questions_per_table)
+  
+  // Generate tables
+  for table_idx in range(num_tables) {
+    let start_idx = table_idx * questions_per_table
+    let end_idx = calc.min(start_idx + questions_per_table, num_questions)
+    
+    let question_headers = ()
+    let point_values = ()
+    let score_cells = ()
+    
+    // Add questions for this table
+    for i in range(start_idx, end_idx) {
+      let qdata = question_data.at(i)
+      question_headers.push([#qdata.num])
+      point_values.push([#qdata.points])
+      score_cells.push([])  // Empty score cell
+    }
+    
+    // Add total/bonus columns only to the last table
+    if table_idx == num_tables - 1 {
+      question_headers.push(strong([Total]))
+      point_values.push(strong([#total]))
+      score_cells.push([])
+      
+      if has_bonus {
+        question_headers.push(strong([Bonus]))
+        point_values.push(strong([#bonus]))
+        score_cells.push([])
+      }
+    }
+    
+    // Build table rows
+    let num_cols = question_headers.len()
+    let rows = (
+      ([Question], ..question_headers),
+      ([Points], ..point_values),
+      ([Score], ..score_cells)
+    )
+    
+    // Create table
+    v(1em)
+    table(
+      columns: num_cols + 1,
+      stroke: 0.5pt + black,
+      align: center + horizon,
+      inset: 8pt,
+      ..rows.flatten()
+    )
+    
+    // Add small space between tables if there are multiple
+    if table_idx < num_tables - 1 {
+      v(0.5em)
+    }
   }
-  
-  // Build table rows
-  let num_cols = question_headers.len()
-  let rows = (
-    ([Question], ..question_headers),
-    ([Points], ..point_values),
-    ([Score], ..score_cells)
-  )
-  
-  // Create table
-  v(1em)
-  table(
-    columns: num_cols + 1,
-    stroke: 0.5pt + black,
-    align: center + horizon,
-    inset: 8pt,
-    ..rows.flatten()
-  )
   v(1em)
 }
 
@@ -1486,7 +1523,8 @@
 #let point_table_horizontal(
   include_bonus: false,
   cell_width: auto,
-  row_height: auto
+  row_height: auto,
+  max_cols: 15  // Maximum columns per table before breaking
 ) = context {
   let qpoints = question-points.get()
   
@@ -1497,47 +1535,82 @@
     return [_No questions with points found_]
   }
   
-  // Build headers
-  let question_headers = ()
-  let point_values = ()
+  // Build question data
+  let question_data = ()
   
   // Add regular questions
   for qnum in qnums {
     let qdata = qpoints.at(qnum)
     if not qdata.bonus or include_bonus {
-      question_headers.push([#qnum])
-      point_values.push([#qdata.points])
+      question_data.push((
+        num: qnum,
+        points: qdata.points,
+        is_bonus: qdata.bonus
+      ))
     }
   }
   
-  // Add total column
+  // Calculate how many tables we need
   let total = total-points.get()
   let bonus = total-bonus-points.get()
+  let has_bonus = include_bonus and bonus > 0
+  let reserved_cols = if has_bonus { 2 } else { 1 }
   
-  question_headers.push(strong([Total]))
-  point_values.push(strong([#total]))
+  // Adjust max_cols to account for the label column
+  let effective_max = max_cols - 1  // -1 for the "Question"/"Points" label column
   
-  if include_bonus and bonus > 0 {
-    question_headers.push(strong([Bonus]))
-    point_values.push(strong([#bonus]))
+  let num_questions = question_data.len()
+  let questions_per_table = calc.max(1, effective_max - reserved_cols)
+  let num_tables = calc.ceil(num_questions / questions_per_table)
+  
+  // Generate tables
+  for table_idx in range(num_tables) {
+    let start_idx = table_idx * questions_per_table
+    let end_idx = calc.min(start_idx + questions_per_table, num_questions)
+    
+    let question_headers = ()
+    let point_values = ()
+    
+    // Add questions for this table
+    for i in range(start_idx, end_idx) {
+      let qdata = question_data.at(i)
+      question_headers.push([#qdata.num])
+      point_values.push([#qdata.points])
+    }
+    
+    // Add total/bonus columns only to the last table
+    if table_idx == num_tables - 1 {
+      question_headers.push(strong([Total]))
+      point_values.push(strong([#total]))
+      
+      if has_bonus {
+        question_headers.push(strong([Bonus]))
+        point_values.push(strong([#bonus]))
+      }
+    }
+    
+    // Build table rows
+    let num_cols = question_headers.len()
+    let rows = (
+      ([Question], ..question_headers),
+      ([Points], ..point_values)
+    )
+    
+    // Create table
+    v(1em)
+    table(
+      columns: num_cols + 1,
+      stroke: 0.5pt + black,
+      align: center + horizon,
+      inset: 8pt,
+      ..rows.flatten()
+    )
+    
+    // Add small space between tables if there are multiple
+    if table_idx < num_tables - 1 {
+      v(0.5em)
+    }
   }
-  
-  // Build table rows
-  let num_cols = question_headers.len()
-  let rows = (
-    ([Question], ..question_headers),
-    ([Points], ..point_values)
-  )
-  
-  // Create table
-  v(1em)
-  table(
-    columns: num_cols + 1,
-    stroke: 0.5pt + black,
-    align: center + horizon,
-    inset: 8pt,
-    ..rows.flatten()
-  )
   v(1em)
 }
 
@@ -1546,7 +1619,8 @@
   orientation: "vertical",
   table_type: "grade",
   include_bonus: false,
-  index_by: "questions"
+  index_by: "questions",
+  max_cols: 15
 ) = {
   // For now, only support index-by questions (page indexing is complex)
   if index_by != "questions" {
@@ -1558,13 +1632,13 @@
     if orientation == "vertical" {
       grade_table_vertical(include_bonus: include_bonus)
     } else {
-      grade_table_horizontal(include_bonus: include_bonus)
+      grade_table_horizontal(include_bonus: include_bonus, max_cols: max_cols)
     }
   } else if table_type == "point" {
     if orientation == "vertical" {
       point_table_vertical(include_bonus: include_bonus)
     } else {
-      point_table_horizontal(include_bonus: include_bonus)
+      point_table_horizontal(include_bonus: include_bonus, max_cols: max_cols)
     }
   } else {
     [_Unknown table type_]

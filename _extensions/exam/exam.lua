@@ -562,12 +562,18 @@ function Div(el)
     local index_by = get_attribute(el, "index-by", "questions")
     local orientation = get_attribute(el, "orientation", "vertical")
     local include_bonus = parse_boolean(get_attribute(el, "include-bonus"), false)
+    local max_cols = parse_number(get_attribute(el, "max-cols"))
     
     local result = "#grade_table("
     result = result .. "orientation: \"" .. orientation .. "\", "
     result = result .. "table_type: \"grade\", "
     result = result .. "include_bonus: " .. tostring(include_bonus) .. ", "
     result = result .. "index_by: \"" .. index_by .. "\""
+    
+    if max_cols ~= nil then
+      result = result .. ", max_cols: " .. tostring(max_cols)
+    end
+    
     result = result .. ")"
     
     return pandoc.RawBlock("typst", result)
@@ -578,12 +584,18 @@ function Div(el)
     local index_by = get_attribute(el, "index-by", "questions")
     local orientation = get_attribute(el, "orientation", "vertical")
     local include_bonus = parse_boolean(get_attribute(el, "include-bonus"), false)
+    local max_cols = parse_number(get_attribute(el, "max-cols"))
     
     local result = "#grade_table("
     result = result .. "orientation: \"" .. orientation .. "\", "
     result = result .. "table_type: \"point\", "
     result = result .. "include_bonus: " .. tostring(include_bonus) .. ", "
     result = result .. "index_by: \"" .. index_by .. "\""
+    
+    if max_cols ~= nil then
+      result = result .. ", max_cols: " .. tostring(max_cols)
+    end
+    
     result = result .. ")"
     
     return pandoc.RawBlock("typst", result)
