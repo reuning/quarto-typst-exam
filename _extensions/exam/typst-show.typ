@@ -1,6 +1,13 @@
 // Typst show file for exam format
 // This file invokes the exam template with metadata from YAML
 
+// Show rules for exam cross-reference figures
+// These ensure figures are left-aligned (not centered)
+#show figure.where(kind: "exam-question"): set align(left)
+#show figure.where(kind: "exam-part"): set align(left)
+#show figure.where(kind: "exam-subpart"): set align(left)
+#show figure.where(kind: "exam-subsubpart"): set align(left)
+
 #show: exam.with(
 $if(title)$
   title: [$title$],

@@ -146,8 +146,6 @@
   }
   
   // Build the question display based on point position
-  v(0.5em)
-  
   let question_content = if point-position == "left-margin" {
     // Points in left margin
     grid(
@@ -231,9 +229,20 @@
     )
   }
   
-  // Output the question content
-  question_content
-  
+  // Output with figure wrapper for cross-references
+  // Always wrap in figure for consistency, even without label
+  v(0.5em)
+  [#figure(
+    kind: "exam-question",
+    supplement: [Question],
+    numbering: _ => {
+      // Get the counter value at figure creation time
+      str(question-counter.get().first())
+    },
+    gap: 0em,  // No gap between figure and content
+    outlined: false,  // Don't include in outline
+    question_content
+  )#if label != none { label }]
   v(0.3em)
 }
 
@@ -274,9 +283,7 @@
   }
   
   // Build the part display
-  v(0.3em)
-  
-  if point-position == "left-margin" {
+  let part_content = if point-position == "left-margin" {
     block[#grid(
       columns: (auto, 1fr),
       column-gutter: 1em,
@@ -292,13 +299,13 @@
         let letter = numbering("a", num)
         [(#letter)]
       } #body]
-    ) #if label != none { label }]
+    )]
   } else if point-position == "dropped" {
     block[#h(1.5em)#context {
       let num = part-counter.get().first()
       let letter = numbering("a", num)
       [(#letter)]
-    } #body #if point-display != none { h(0.5em) + point-display } #if label != none { label }]
+    } #body #if point-display != none { h(0.5em) + point-display }]
   } else {
     // Default to right margin
     block[#grid(
@@ -316,9 +323,23 @@
       } else {
         []
       }
-    ) #if label != none { label }]
+    )]
   }
   
+  // Output with figure wrapper for cross-references
+  // Always wrap in figure for consistency
+  v(0.3em)
+  [#figure(
+    kind: "exam-part",
+    supplement: [Part],
+    numbering: _ => {
+      let num = part-counter.get().first()
+      numbering("a", num)
+    },
+    gap: 0em,
+    outlined: false,
+    part_content
+  )#if label != none { label }]
   v(0.2em)
 }
 
@@ -358,9 +379,7 @@
   }
   
   // Build the subpart display
-  v(0.2em)
-  
-  if point-position == "left-margin" {
+  let subpart_content = if point-position == "left-margin" {
     block[#grid(
       columns: (auto, 1fr),
       column-gutter: 1em,
@@ -376,13 +395,13 @@
         let roman = numbering("i", num)
         [(#roman)]
       } #body]
-    ) #if label != none { label }]
+    )]
   } else if point-position == "dropped" {
     block[#h(3em)#context {
       let num = subpart-counter.get().first()
       let roman = numbering("i", num)
       [(#roman)]
-    } #body #if point-display != none { h(0.5em) + point-display } #if label != none { label }]
+    } #body #if point-display != none { h(0.5em) + point-display }]
   } else {
     // Default to right margin
     block[#grid(
@@ -400,9 +419,23 @@
       } else {
         []
       }
-    ) #if label != none { label }]
+    )]
   }
   
+  // Output with figure wrapper for cross-references
+  // Always wrap in figure for consistency
+  v(0.2em)
+  [#figure(
+    kind: "exam-subpart",
+    supplement: [Subpart],
+    numbering: _ => {
+      let num = subpart-counter.get().first()
+      numbering("i", num)
+    },
+    gap: 0em,
+    outlined: false,
+    subpart_content
+  )#if label != none { label }]
   v(0.2em)
 }
 
@@ -439,9 +472,7 @@
   }
   
   // Build the subsubpart display
-  v(0.2em)
-  
-  if point-position == "left-margin" {
+  let subsubpart_content = if point-position == "left-margin" {
     block[#grid(
       columns: (auto, 1fr),
       column-gutter: 1em,
@@ -462,7 +493,7 @@
         }
         [(#letter)]
       } #body]
-    ) #if label != none { label }]
+    )]
   } else if point-position == "dropped" {
     block[#h(4.5em)#context {
       let num = subsubpart-counter.get().first()
@@ -473,7 +504,7 @@
         numbering("a", num)
       }
       [(#letter)]
-    } #body #if point-display != none { h(0.5em) + point-display } #if label != none { label }]
+    } #body #if point-display != none { h(0.5em) + point-display }]
   } else {
     // Default to right margin
     block[#grid(
@@ -496,9 +527,28 @@
       } else {
         []
       }
-    ) #if label != none { label }]
+    )]
   }
   
+  // Output with figure wrapper for cross-references
+  // Always wrap in figure for consistency
+  v(0.2em)
+  [#figure(
+    kind: "exam-subsubpart",
+    supplement: [Subsubpart],
+    numbering: _ => {
+      let num = subsubpart-counter.get().first()
+      let greek = ("α", "β", "γ", "δ", "ε", "ζ", "η", "θ")
+      if num <= greek.len() {
+        greek.at(num - 1)
+      } else {
+        numbering("a", num)
+      }
+    },
+    gap: 0em,
+    outlined: false,
+    subsubpart_content
+  )#if label != none { label }]
   v(0.2em)
 }
 
