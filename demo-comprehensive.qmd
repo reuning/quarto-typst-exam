@@ -59,12 +59,6 @@ format:
 **IMPORTANT**: This exam demonstrates all features of the Quarto Exam Format extension. Read all instructions carefully. You have 3 hours to complete this exam. Show all work for partial credit.
 :::
 
-## Grading Table
-
-::: {.grade-table orientation="horizontal"}
-:::
-
-\
 
 # Section 1: Basic Question Hierarchy
 
@@ -110,7 +104,7 @@ Complete the algebraic steps of the proof.
 Show that $a^2 + b^2 = c^2$ using similar triangles.
 :::
 
-::: {.solution}
+::: {.solutiontext}
 Using similar triangles, we can show that the areas relate such that $a^2 + b^2 = c^2$.
 :::
 
@@ -141,7 +135,7 @@ This question has exactly 1 point (singular form test).
 **Bonus Question**: What is the airspeed velocity of an unladen swallow?
 :::
 
-::: {.solution style="shaded"}
+::: {.solutiontext style="shaded"}
 African or European? (Approximately 11 meters per second for European swallow)
 :::
 
@@ -212,7 +206,7 @@ This section demonstrates different solution styles and answer spaces.
 What is the integral of $f(x) = 2x$?
 :::
 
-::: {.solution style="framed"}
+::: {.solutiontext style="framed"}
 $\int 2x \, dx = x^2 + C$
 :::
 
@@ -220,7 +214,7 @@ $\int 2x \, dx = x^2 + C$
 Explain the concept of limits.
 :::
 
-::: {.solution style="shaded"}
+::: {.solutiontext style="shaded"}
 A limit describes the value that a function approaches as the input approaches some value. It's fundamental to calculus.
 :::
 
@@ -228,7 +222,7 @@ A limit describes the value that a function approaches as the input approaches s
 Describe three types of chemical bonds.
 :::
 
-::: {.solution style="unframed"}
+::: {.solutiontext style="unframed"}
 1. **Ionic bonds**: Transfer of electrons
 2. **Covalent bonds**: Sharing of electrons
 3. **Metallic bonds**: Sea of electrons
@@ -286,7 +280,7 @@ Starting with $x_0 = 1.5$, iterate: $x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$ whe
 Prove that there are infinitely many prime numbers.
 :::
 
-::: {.solution}
+::: {.solutiontext}
 **Euclid's proof**: Assume finitely many primes $p_1, p_2, \ldots, p_n$. Consider $N = p_1 \cdot p_2 \cdots p_n + 1$. This number is not divisible by any of the primes, so either it's prime itself or divisible by a prime not in our list. Contradiction.
 :::
 
@@ -357,7 +351,7 @@ $\lambda = \frac{5 \pm \sqrt{33}}{2}$
 Find the determinant of $A$.
 :::
 
-::: {.solution}
+::: {.solutiontext}
 $\det(A) = 1 \cdot 4 - 2 \cdot 3 = -2$
 :::
 
@@ -405,7 +399,7 @@ True or False: Every continuous function is differentiable.
 - False
 :::
 
-::: {.solution}
+::: {.solutiontext}
 **False**. Example: $f(x) = |x|$ is continuous everywhere but not differentiable at $x = 0$.
 :::
 
@@ -418,7 +412,7 @@ True or False: Every differentiable function is continuous.
 - False
 :::
 
-::: {.solution}
+::: {.solutiontext}
 **True**. Differentiability implies continuity.
 :::
 
@@ -436,7 +430,7 @@ Differentiability is a stronger condition than continuity. If a function is diff
 What is the limit: $\lim_{x \to 0} \frac{\sin x}{x}$?
 :::
 
-::: {.solution title="Answer:"}
+::: {.solutiontext title="Answer:"}
 The limit equals 1. This is a standard limit in calculus.
 :::
 
@@ -508,7 +502,7 @@ $CI = [93.81, 106.19]$
 Interpret the confidence interval.
 :::
 
-::: {.solution}
+::: {.solutiontext}
 We are 95% confident that the true population mean lies between 93.81 and 106.19.
 :::
 
