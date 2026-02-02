@@ -9,7 +9,7 @@ A Quarto extension that provides an exam format for Typst, inspired by the LaTeX
 ## Installation
 
 ```bash
-quarto add [your-username]/exam
+quarto add reunin/exam
 ```
 
 ## Quick Start
