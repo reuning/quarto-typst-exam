@@ -1989,24 +1989,4 @@
   
   // Display the document body
   body
-  
-  // Display total points at the end (for Phase 1)
-  if add-points {
-    v(1em)
-    line(length: 100%, stroke: 0.5pt)
-    v(0.5em)
-    context {
-      let total = total-points.get()
-      let bonus = total-bonus-points.get()
-      
-      if total > 0 or bonus > 0 {
-        text(weight: "bold")[
-          Total Points: #total
-          #if bonus > 0 [
-            \ Total Bonus Points: #bonus
-          ]
-        ]
-      }
-    }
-  }
 }
