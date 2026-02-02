@@ -136,6 +136,18 @@
         dict
       })
     }
+  } else {
+    // Track questions without direct points (will aggregate from parts later)
+    context {
+      let num = question-counter.get().first()
+      question-points.update(dict => {
+        // Initialize with 0 points - will be updated by parts
+        if str(num) not in dict {
+          dict.insert(str(num), (points: 0, bonus: false))
+        }
+        dict
+      })
+    }
   }
   
   // Format the point display
@@ -273,6 +285,22 @@
     } else {
       total-points.update(x => x + points)
     }
+    
+    // Also update the parent question's point total
+    context {
+      let qnum = question-counter.get().first()
+      question-points.update(dict => {
+        let key = str(qnum)
+        if key in dict {
+          let current = dict.at(key)
+          dict.insert(key, (
+            points: current.points + points,
+            bonus: current.bonus or bonus
+          ))
+        }
+        dict
+      })
+    }
   }
   
   // Format the point display
@@ -369,6 +397,22 @@
     } else {
       total-points.update(x => x + points)
     }
+    
+    // Also update the parent question's point total
+    context {
+      let qnum = question-counter.get().first()
+      question-points.update(dict => {
+        let key = str(qnum)
+        if key in dict {
+          let current = dict.at(key)
+          dict.insert(key, (
+            points: current.points + points,
+            bonus: current.bonus or bonus
+          ))
+        }
+        dict
+      })
+    }
   }
   
   // Format the point display
@@ -461,6 +505,22 @@
       total-bonus-points.update(x => x + points)
     } else {
       total-points.update(x => x + points)
+    }
+    
+    // Also update the parent question's point total
+    context {
+      let qnum = question-counter.get().first()
+      question-points.update(dict => {
+        let key = str(qnum)
+        if key in dict {
+          let current = dict.at(key)
+          dict.insert(key, (
+            points: current.points + points,
+            bonus: current.bonus or bonus
+          ))
+        }
+        dict
+      })
     }
   }
   
