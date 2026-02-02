@@ -1,4 +1,4 @@
- [!WARNING] 
+> [!WARNING] 
 > This was a mostly vibe coded project as I wanted to port the latex exam class to Typst because of PDF accessibility issues (also Typst seems less frustrating?). I used [Roo Code](https://roocode.com/) in VS with Claude Sonnet 4.5 through [OpenRouter](https://openrouter.ai/). This is the ["alpha-slop" version.](https://simonwillison.net/2026/Jan/11/answers/)
 
 
@@ -9,7 +9,7 @@ A Quarto extension that provides an exam format for Typst, inspired by the LaTeX
 ## Installation
 
 ```bash
-quarto add reunin/exam
+quarto add reuning/quarto-typst-exam
 ```
 
 ## Quick Start
