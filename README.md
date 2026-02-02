@@ -1,3 +1,7 @@
+ [!WARNING] 
+> This was a mostly vibe coded project as I wanted to port the latex exam class to Typst because of PDF accessibility issues (also Typst seems less frustrating?). I used [Roo Code](https://roocode.com/) in VS with Claude Sonnet 4.5 through [OpenRouter](https://openrouter.ai/). This is the ["alpha-slop" version.](https://simonwillison.net/2026/Jan/11/answers/)
+
+
 # Quarto Exam Format for Typst
 
 A Quarto extension that provides an exam format for Typst, inspired by the LaTeX `exam` document class.
