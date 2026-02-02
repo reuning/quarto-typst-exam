@@ -313,8 +313,9 @@
   // Build the part display
   let part_content = if point-position == "left-margin" {
     block[#grid(
-      columns: (auto, 1fr),
-      column-gutter: 1em,
+      columns: (auto, auto, 1fr),
+      column-gutter: (1em, 0.5em),
+      align: (top, top, top),
       
       if point-display != none {
         align(right)[#point-display]
@@ -322,29 +323,42 @@
         []
       },
       
-      [#h(1.5em)#context {
+      h(1.5em) + context {
         let num = part-counter.get().first()
         let letter = numbering("a", num)
         [(#letter)]
-      } #body]
+      },
+      
+      body
     )]
   } else if point-position == "dropped" {
-    block[#h(1.5em)#context {
-      let num = part-counter.get().first()
-      let letter = numbering("a", num)
-      [(#letter)]
-    } #body #if point-display != none { h(0.5em) + point-display }]
+    block[#grid(
+      columns: (auto, 1fr),
+      column-gutter: 0.5em,
+      align: (top, top),
+      
+      h(1.5em) + context {
+        let num = part-counter.get().first()
+        let letter = numbering("a", num)
+        [(#letter)]
+      },
+      
+      [#body #if point-display != none { h(0.5em) + point-display }]
+    )]
   } else {
     // Default to right margin
     block[#grid(
-      columns: (1fr, auto),
-      column-gutter: 1em,
+      columns: (auto, 1fr, auto),
+      column-gutter: (0.5em, 1em),
+      align: (top, top, top),
       
-      [#h(1.5em)#context {
+      h(1.5em) + context {
         let num = part-counter.get().first()
         let letter = numbering("a", num)
         [(#letter)]
-      } #body],
+      },
+      
+      body,
       
       if point-display != none {
         align(right + top)[#point-display]
@@ -425,8 +439,9 @@
   // Build the subpart display
   let subpart_content = if point-position == "left-margin" {
     block[#grid(
-      columns: (auto, 1fr),
-      column-gutter: 1em,
+      columns: (auto, auto, 1fr),
+      column-gutter: (1em, 0.5em),
+      align: (top, top, top),
       
       if point-display != none {
         align(right)[#point-display]
@@ -434,29 +449,42 @@
         []
       },
       
-      [#h(3em)#context {
+      h(3em) + context {
         let num = subpart-counter.get().first()
         let roman = numbering("i", num)
         [(#roman)]
-      } #body]
+      },
+      
+      body
     )]
   } else if point-position == "dropped" {
-    block[#h(3em)#context {
-      let num = subpart-counter.get().first()
-      let roman = numbering("i", num)
-      [(#roman)]
-    } #body #if point-display != none { h(0.5em) + point-display }]
+    block[#grid(
+      columns: (auto, 1fr),
+      column-gutter: 0.5em,
+      align: (top, top),
+      
+      h(3em) + context {
+        let num = subpart-counter.get().first()
+        let roman = numbering("i", num)
+        [(#roman)]
+      },
+      
+      [#body #if point-display != none { h(0.5em) + point-display }]
+    )]
   } else {
     // Default to right margin
     block[#grid(
-      columns: (1fr, auto),
-      column-gutter: 1em,
+      columns: (auto, 1fr, auto),
+      column-gutter: (0.5em, 1em),
+      align: (top, top, top),
       
-      [#h(3em)#context {
+      h(3em) + context {
         let num = subpart-counter.get().first()
         let roman = numbering("i", num)
         [(#roman)]
-      } #body],
+      },
+      
+      body,
       
       if point-display != none {
         align(right + top)[#point-display]
@@ -534,8 +562,9 @@
   // Build the subsubpart display
   let subsubpart_content = if point-position == "left-margin" {
     block[#grid(
-      columns: (auto, 1fr),
-      column-gutter: 1em,
+      columns: (auto, auto, 1fr),
+      column-gutter: (1em, 0.5em),
+      align: (top, top, top),
       
       if point-display != none {
         align(right)[#point-display]
@@ -543,7 +572,7 @@
         []
       },
       
-      [#h(4.5em)#context {
+      h(4.5em) + context {
         let num = subsubpart-counter.get().first()
         let greek = ("α", "β", "γ", "δ", "ε", "ζ", "η", "θ")
         let letter = if num <= greek.len() {
@@ -552,26 +581,37 @@
           numbering("a", num)
         }
         [(#letter)]
-      } #body]
+      },
+      
+      body
     )]
   } else if point-position == "dropped" {
-    block[#h(4.5em)#context {
-      let num = subsubpart-counter.get().first()
-      let greek = ("α", "β", "γ", "δ", "ε", "ζ", "η", "θ")
-      let letter = if num <= greek.len() {
-        greek.at(num - 1)
-      } else {
-        numbering("a", num)
-      }
-      [(#letter)]
-    } #body #if point-display != none { h(0.5em) + point-display }]
+    block[#grid(
+      columns: (auto, 1fr),
+      column-gutter: 0.5em,
+      align: (top, top),
+      
+      h(4.5em) + context {
+        let num = subsubpart-counter.get().first()
+        let greek = ("α", "β", "γ", "δ", "ε", "ζ", "η", "θ")
+        let letter = if num <= greek.len() {
+          greek.at(num - 1)
+        } else {
+          numbering("a", num)
+        }
+        [(#letter)]
+      },
+      
+      [#body #if point-display != none { h(0.5em) + point-display }]
+    )]
   } else {
     // Default to right margin
     block[#grid(
-      columns: (1fr, auto),
-      column-gutter: 1em,
+      columns: (auto, 1fr, auto),
+      column-gutter: (0.5em, 1em),
+      align: (top, top, top),
       
-      [#h(4.5em)#context {
+      h(4.5em) + context {
         let num = subsubpart-counter.get().first()
         let greek = ("α", "β", "γ", "δ", "ε", "ζ", "η", "θ")
         let letter = if num <= greek.len() {
@@ -580,7 +620,9 @@
           numbering("a", num)
         }
         [(#letter)]
-      } #body],
+      },
+      
+      body,
       
       if point-display != none {
         align(right + top)[#point-display]
